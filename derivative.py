@@ -56,6 +56,12 @@ class Dual(object):
 		elif self.b < 0:
 			return '{} - {}e'.format(self.a, -self.b)
 
+	def __eq__(self, other):
+		if isinstance(other, Dual):
+			return self.a == other.a and self.b == other.b
+		else:
+			return self.a == other and self.b == 0
+
 def derive(f, x):
 	"""
 	Returns the derivative of `f` at position `x`.
