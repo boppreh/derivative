@@ -48,6 +48,12 @@ class Dual(object):
 	def __rtruediv__(self, other):
 		return Dual(other / self.a, other / self.b)
 
+	def __pow__(self, other):
+		result = 1
+		for i in xrange(other):
+			result = result * self
+		return result
+
 	def __str__(self):
 		if self.b == 0:
 			return str(self.a)
