@@ -46,7 +46,7 @@ class Dual(object):
 			return Dual(self.a / other, self.b / other)
 
 	def __rtruediv__(self, other):
-		return Dual(other / self.a, other / self.b)
+		return Dual(other, 0) / self
 
 	def __pow__(self, other):
 		result = 1
@@ -75,5 +75,5 @@ def derive(f, x):
 	return f(Dual(x, 1)).b
 
 if __name__ == '__main__':
-	f = lambda x: x * 5 + 2 * (x * x + 3)
-	print(derive(f, 3))
+	f = lambda x: x * 5 + x ** 2 - 2 / x + 3 / x ** 2
+	print(derive(f, 6))
