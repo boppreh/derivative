@@ -1,6 +1,10 @@
 from __future__ import division
 
 class Dual(object):
+	"""
+	Represents a number of the form a + b * e, where e != 0
+	but e^2 = 0.
+	"""
 	def __init__(self, a=0.0, b=0.0):
 		self.a = a
 		self.b = b
@@ -41,12 +45,6 @@ class Dual(object):
 		else:
 			return Dual(self.a * other, self.b * other)
 
-	def __truediv__(self, other):
-		if isinstance(other, Dual):
-			return Dual(self.a * other.a, self.b * other.a + other.b * self.a)
-		else:
-			return Dual(self.a * other, self.b * other)
-
 	def __str__(self):
 		if self.b == 0:
 			return str(self.a)
@@ -55,6 +53,12 @@ class Dual(object):
 		elif self.b < 0:
 			return '{} - {}e'.format(self.a, -self.b)
 
-x = Dual(1, 1)
-y = Dual(3, -5)
-print(x * y)
+def derive(f, x):
+	"""
+	Returns the derivative of `f` at position `x`.
+	"""
+	return f(Dual(x, 1)).b
+
+if __name__ == '__main__':
+	f = lambda x: x * 5 + 2 * (x * x + 3)
+	print(derive(f, 3))
