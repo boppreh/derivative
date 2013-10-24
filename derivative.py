@@ -45,6 +45,18 @@ class Dual(object):
 		else:
 			return Dual(self.a * other, self.b * other)
 
+	def __truediv__(self, other):
+		if isinstance(other, Dual):
+			c2 = other.a * other.a
+			a = self.a * other.a / c2
+			b = (self.b * other.a - self.a * other.b) / c2
+			return Dual(a, b)
+		else:
+			return Dual(self.a / other, self.b / other)
+
+	def __rtruediv__(self, other):
+		return Dual(other / self.a, other / self.b)
+
 	def __str__(self):
 		if self.b == 0:
 			return str(self.a)
