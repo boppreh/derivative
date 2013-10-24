@@ -16,10 +16,7 @@ class Dual(object):
 			return Dual(self.a + other, self.b)
 
 	def __radd__(self, other):
-		if isinstance(other, Dual):
-			return Dual(self.a + other.a, self.b + other.b)
-		else:
-			return Dual(self.a + other, self.b)
+		return Dual(self.a + other, self.b)
 
 	def __sub__(self, other):
 		if isinstance(other, Dual):
@@ -28,10 +25,7 @@ class Dual(object):
 			return Dual(self.a - other, self.b)
 
 	def __rsub__(self, other):
-		if isinstance(other, Dual):
-			return Dual(other.a - self.a, other.b - self.b)
-		else:
-			return Dual(other - self.a, self.b)
+		return Dual(other - self.a, self.b)
 
 	def __mul__(self, other):
 		if isinstance(other, Dual):
@@ -40,10 +34,7 @@ class Dual(object):
 			return Dual(self.a * other, self.b * other)
 
 	def __rmul__(self, other):
-		if isinstance(other, Dual):
-			return Dual(self.a * other.a, self.b * other.a + other.b * self.a)
-		else:
-			return Dual(self.a * other, self.b * other)
+		return Dual(self.a * other, self.b * other)
 
 	def __truediv__(self, other):
 		if isinstance(other, Dual):
