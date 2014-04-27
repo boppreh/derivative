@@ -50,7 +50,7 @@ class Dual(object):
 
     def __pow__(self, other):
         result = 1
-        for i in xrange(other):
+        for i in range(other):
             result = result * self
         return result
 
