@@ -39,7 +39,7 @@ class Dual(object):
     def __truediv__(self, other):
         if isinstance(other, Dual):
             c2 = other.a * other.a
-            a = self.a * other.a / c2
+            a = self.a / other.a
             b = (self.b * other.a - self.a * other.b) / c2
             return Dual(a, b)
         else:
